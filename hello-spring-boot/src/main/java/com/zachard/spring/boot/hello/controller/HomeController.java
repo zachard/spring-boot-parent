@@ -16,24 +16,25 @@
 
 package com.zachard.spring.boot.hello.controller;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zachard.spring.boot.hello.bean.PropertySourceBean;
+
 /**
- * Spring Boot 框架学习 Hello World 示例
  * <p>
  *  {@link RestController} 注解表示控制器支持REST
- *  {@link EnableAutoConfiguration} 注解告诉Spring Boot如何配置Spring
  * </p>
  *
  * @author zachard
  * @version 1.0.0
  */
 @RestController
-@EnableAutoConfiguration
-public class HelloSpringBoot {
+public class HomeController {
+	
+	@Autowired
+	private PropertySourceBean propertySourceBean;
 	
 	/**
 	 * 对 / 请求进行处理的控制器
@@ -48,12 +49,30 @@ public class HelloSpringBoot {
 		return "Hello World";
 	}
 	
-	public static void main(String[] args) throws Exception {
-		
-		/* 通过SpringApplication类启动一个Spring应用
-		 * run方法中第一个参数声明Spring的组件，第二个参数传递所有命令行参数
-		 */
-		SpringApplication.run(HelloSpringBoot.class, args);
+	/**
+	 * 对 /property 请求进行处理
+	 * 
+	 * @return   控制器返回内容
+	 */
+	@RequestMapping("/property")
+	String property() {
+		return propertySourceBean.getName() + " " + propertySourceBean.getAge();
+	}
+
+	/**
+	 * 获取 propertySourceBean 属性对象
+	 * @return {@link PropertySourceBean}  对象
+	 */
+	public PropertySourceBean getPropertySourceBean() {
+		return propertySourceBean;
+	}
+
+	/**
+	 * 设置 propertySourceBean 属性对象
+	 * @param propertySourceBean 需要设置的属性对象
+	 */
+	public void setPropertySourceBean(PropertySourceBean propertySourceBean) {
+		this.propertySourceBean = propertySourceBean;
 	}
 
 }
