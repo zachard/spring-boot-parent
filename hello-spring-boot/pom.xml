@@ -17,9 +17,16 @@
   </properties>
   
   <dependencies>
+    <!-- Web Starter -->
     <dependency>
        <groupId>org.springframework.boot</groupId>
 	   <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!-- 开发者工具，项目打包会自动被禁用，设置optional依赖级别为了防止其传递到项目其他模块 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <optional>true</optional>
     </dependency>
   </dependencies>
   

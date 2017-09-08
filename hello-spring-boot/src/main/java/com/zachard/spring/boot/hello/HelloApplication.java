@@ -40,6 +40,9 @@ public class HelloApplication {
 	
 	public static void main(String[] args) throws Exception {
 		
+		//设置系统属性方式彻底禁止Spring Boot重启
+		//System.setProperty("spring.devtools.restart.enabled", "true");
+		
 		/* 通过SpringApplication类启动一个Spring应用
 		 * run方法中第一个参数声明Spring的组件，第二个参数传递所有命令行参数
 		 */
