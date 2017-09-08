@@ -1,0 +1,26 @@
+# 默认情况下，application.yaml文件会代替application.properties文件
+
+# 配置name属性的值,解析之后的值: my.name=zachard
+my: 
+    name: zachard
+    servers: dev.zachard.com,foo.zachard.com
+    
+# yaml文件配置数组的方式
+servers: 
+  - dev.zachard.com
+  - foo.zachard.com
+  
+# 在yaml文件中配置多个profile
+# 默认情况下server.port为8080, 当spring.profiles.active属性指定为development时，访问端口变成8090
+server: 
+  port: 8080
+---
+spring: 
+  profiles: development
+server: 
+  port: 8090
+---
+spring: 
+  profiles: production
+server: 
+  port: 9090

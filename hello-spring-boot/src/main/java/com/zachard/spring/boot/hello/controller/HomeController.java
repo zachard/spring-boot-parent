@@ -16,6 +16,8 @@
 
 package com.zachard.spring.boot.hello.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,6 +59,20 @@ public class HomeController {
 	@RequestMapping("/property")
 	String property() {
 		return propertySourceBean.getName() + " " + propertySourceBean.getAge();
+	}
+	
+	/**
+	 * 对 ／servers 请求进行处理
+	 * 
+	 * @return   控制器返回的内容
+	 */
+	@RequestMapping("/servers")
+	String servers() {
+		StringBuilder serversBuilder = new StringBuilder();
+		List<String> servers = propertySourceBean.getServers();
+		servers.forEach(server -> serversBuilder.append(server + " "));
+		
+		return serversBuilder.toString();
 	}
 
 	/**
