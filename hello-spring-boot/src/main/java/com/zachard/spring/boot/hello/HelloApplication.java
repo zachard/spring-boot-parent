@@ -38,6 +38,17 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 public class HelloApplication {
 	
+	static {
+		try {
+			//初始化自定义日志系统
+//			String log4jPath = HelloApplication.class.getClassLoader().getResource("")
+//					.getPath() + "log4j.properties";
+//			PropertyConfigurator.configure(log4jPath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) throws Exception {
 		
 		//设置系统属性方式彻底禁止Spring Boot重启

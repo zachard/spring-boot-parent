@@ -35,6 +35,11 @@ import com.zachard.spring.boot.hello.bean.PropertySourceBean;
 @RestController
 public class HomeController {
 	
+	/**
+	 * 配置自定义日志系统
+	 */
+	//private Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
 	@Autowired
 	private PropertySourceBean propertySourceBean;
 	
@@ -71,6 +76,7 @@ public class HomeController {
 		StringBuilder serversBuilder = new StringBuilder();
 		List<String> servers = propertySourceBean.getServers();
 		servers.forEach(server -> serversBuilder.append(server + " "));
+		//logger.info(serversBuilder.toString());
 		
 		return serversBuilder.toString();
 	}
