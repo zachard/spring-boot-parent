@@ -36,5 +36,43 @@ public class User implements Serializable {
 	 * </pre>
 	 */
 	private static final long serialVersionUID = 7850379309987537800L;
+	
+	/**
+	 * 用户编号
+	 */
+	private String userNo;
+	
+	/**
+	 * 用户姓名
+	 */
+	private String userName;
+
+	/**
+	 * @return the userNo
+	 */
+	public String getUserNo() {
+		return userNo;
+	}
+
+	/**
+	 * @param userNo the userNo to set
+	 */
+	public void setUserNo(String userNo) {
+		this.userNo = userNo;
+	}
+
+	/**
+	 * @return the userName
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 }
