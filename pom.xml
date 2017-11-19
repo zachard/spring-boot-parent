@@ -11,6 +11,7 @@
       <java.version>1.8</java.version>
       <spring.boot.dependencies.version>1.5.6.RELEASE</spring.boot.dependencies.version>
       <fastjson.version>1.2.38</fastjson.version>
+      <mysql.version>5.1.38</mysql.version>
   </properties>
   
   <dependencyManagement>
@@ -30,6 +31,13 @@
 		      <artifactId>fastjson</artifactId>
 		      <version>${fastjson.version}</version>
 		  </dependency>
+		  
+		  <!-- MySQL -->
+		  <dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>${mysql.version}</version>
+		</dependency>
       </dependencies>
   </dependencyManagement>
   
