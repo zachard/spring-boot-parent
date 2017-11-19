@@ -40,9 +40,7 @@ import com.zachard.spring.boot.hello.model.User;
  *     此外,它还支持将<code>Content-Type</code>及<code>Content-Length</code>写入响应信息
  * </pre>
  * <pre>
- *     此自定义类型的转化器主要实现对象与"filed1=value1;filed2=value2;filed3=value3"格式的互转
- *     示例: 
- *     当User对象的name属性为zachard,age属性为20时,转换成字符串为: name=zachard;age=20
+ *     
  * </pre>
  *
  * @author zachard
@@ -58,7 +56,7 @@ public class CustomerHttpMessageConverter extends AbstractHttpMessageConverter<U
 	/**
 	 * HTTP中媒体子子类型
 	 */
-	private static final String MEDIA_SUB_TYPE = "format-user";
+	private static final String MEDIA_SUB_TYPE = "x-wisely";
 	
 	/**
 	 * HTTP Message Converter字符集
