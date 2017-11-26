@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zachard.spring.boot.hello.model.Book;
-import com.zachard.spring.boot.hello.service.BookRepository;
+import com.zachard.spring.boot.hello.service.BookService;
 
 /**
  * {@link Book}相关请求Controller
@@ -37,10 +37,10 @@ import com.zachard.spring.boot.hello.service.BookRepository;
  * @version 1.0.0
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/book")
 public class BookController {
 	
-	private BookRepository bookRepository;
+	private BookService bookService;
 	
 	/**
 	 * 查询读者阅读书籍列表请求接口
@@ -51,7 +51,7 @@ public class BookController {
 	 */
 	@RequestMapping(value = "/{reader}", method = RequestMethod.GET)
 	public String readersBooks(@PathVariable("reader") String reader, Model model) {
-		List<Book> readingList = bookRepository.findByReader(reader);
+		List<Book> readingList = bookService.findByReader(reader);
 		
 		if (readingList != null) {
 			model.addAttribute("books", readingList);
@@ -70,8 +70,8 @@ public class BookController {
 	@RequestMapping(value="/{reader}", method=RequestMethod.POST)
 	public String addToReadingList(@PathVariable("reader") String reader, Book book) {
 		book.setReader(reader);
-		bookRepository.save(book);
-		return "redirect:/{reader}";
+		bookService.add(book);
+		return "redirect:/book/{reader}";
 	}
 
 	/**
@@ -80,8 +80,8 @@ public class BookController {
 	 * @param  bookRepository  系统自动扫描注解的组件
 	 */
 	@Autowired
-	public void setBookRepository(BookRepository bookRepository) {
-		this.bookRepository = bookRepository;
+	public void setBookService(BookService bookService) {
+		this.bookService = bookService;
 	}
 
 }

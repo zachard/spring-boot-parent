@@ -33,6 +33,12 @@
 	   </exclusions>
     </dependency>
     
+    <!-- Spring 安全的起步依赖 -->
+    <!-- <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency> -->
+    
     <!-- Test Starter -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -41,10 +47,11 @@
     </dependency>
     
     <!-- JPA Starter -->
-    <dependency>
+    <!-- 为了简化数据库配置带来的学习时间上的消耗, 数据库及数据库相关的持久化层都将从代码示例代码中去除 -->
+    <!-- <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
+    </dependency> -->
     
     <!-- Thymeleaf -->
     <dependency>

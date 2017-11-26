@@ -49,6 +49,12 @@ public class HelloApplication {
 		}
 	}
 	
+	/**
+	 * 项目启动入口方法
+	 * 
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String[] args) throws Exception {
 		
 		//设置系统属性方式彻底禁止Spring Boot重启

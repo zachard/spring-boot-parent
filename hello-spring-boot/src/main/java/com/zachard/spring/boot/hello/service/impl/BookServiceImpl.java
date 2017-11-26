@@ -14,32 +14,51 @@
  *    limitations under the License.
  */
 
-package com.zachard.spring.boot.hello.service;
+package com.zachard.spring.boot.hello.service.impl;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
+import com.zachard.spring.boot.hello.dao.BookDao;
 import com.zachard.spring.boot.hello.model.Book;
+import com.zachard.spring.boot.hello.service.BookService;
 
 /**
- * {@link Book}持久化操作接口
+ * 书籍相关Service层实现类
  * <pre>
- *     {@link JpaRepository}泛型接口有两个参数: 
- *     一个是仓库操作的领域对象类型, 另一个是领域对象的ID属性类型
  * </pre>
  *
  * @author zachard
  * @version 1.0.0
  */
-public interface BookRepository extends JpaRepository<Book, Long>{
+@Service
+public class BookServiceImpl implements BookService {
+	
+	@Resource
+	private BookDao bookDao;
 	
 	/**
-	 * 获取读者所读书籍列表
+	 * 根据读者查询其阅读的数据列表
 	 * 
-	 * @param reader    读者
-	 * @return          书籍列表
+	 * @param reader    读者名称
+	 * @return          读者在读的书籍列表
 	 */
-	List<Book> findByReader(String reader);
+	@Override
+	public List<Book> findByReader(String reader) {
+		return bookDao.findByReader(reader);
+	}
+	
+	/**
+	 * 新增书籍
+	 * 
+	 * @param book
+	 */
+	@Override
+	public void add(Book book) {
+		bookDao.add(book);
+	}
 
 }

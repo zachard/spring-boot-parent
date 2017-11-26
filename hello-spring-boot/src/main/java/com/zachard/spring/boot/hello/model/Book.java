@@ -16,11 +16,6 @@
 
 package com.zachard.spring.boot.hello.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 /**
  * 书籍实体类
  * <pre>
@@ -29,17 +24,42 @@ import javax.persistence.Id;
  * @author zachard
  * @version 1.0.0
  */
-@Entity
 public class Book {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String reader;
 	private String isbn;
 	private String title;
 	private String author;
 	private String description;
+	
+	/**
+	 * 当添加了其他构造器时,一定要记得声明初始化构造器
+	 */
+	public Book() {
+		
+	}
+	
+	/**
+	 * 作为初始化数据的构造器, 将数据库及持久化层去除(方便构造数据)
+	 * 
+	 * @param id
+	 * @param reader
+	 * @param isbn
+	 * @param title
+	 * @param author
+	 * @param description
+	 */
+	public Book(Long id, String reader, String isbn, String title, String author, String description) {
+		super();
+		this.id = id;
+		this.reader = reader;
+		this.isbn = isbn;
+		this.title = title;
+		this.author = author;
+		this.description = description;
+	}
+	
 	/**
 	 * @return the id
 	 */
