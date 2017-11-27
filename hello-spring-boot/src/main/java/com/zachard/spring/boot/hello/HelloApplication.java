@@ -21,6 +21,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * Spring Boot 框架学习 Hello World 示例
@@ -34,9 +36,8 @@ import org.springframework.context.annotation.Configuration;
  * @author zachard
  * @version 1.0.0
  */
-@EnableAutoConfiguration
-@ComponentScan
-public class HelloApplication {
+@SpringBootApplication
+public class HelloApplication extends WebMvcConfigurerAdapter {
 	
 	static {
 		try {
@@ -65,5 +66,15 @@ public class HelloApplication {
 		 */
 		SpringApplication.run(HelloApplication.class, args);
 	}
+	
+	/**
+	 * 注册不需要执行任何逻辑,只是跳转页面的url及逻辑视图映射
+	 * 
+	 * @param   registry  
+	 */
+	@Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+      registry.addViewController("/login").setViewName("login");
+    }
 
 }

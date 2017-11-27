@@ -34,10 +34,10 @@
     </dependency>
     
     <!-- Spring 安全的起步依赖 -->
-    <!-- <dependency>
+    <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-security</artifactId>
-    </dependency> -->
+    </dependency>
     
     <!-- Test Starter -->
     <dependency>
