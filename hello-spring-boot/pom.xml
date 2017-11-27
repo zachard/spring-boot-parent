@@ -18,19 +18,31 @@
   </properties>
   
   <dependencies>
+    <!-- Spring Boot中去除Logback日志, 在根起步依赖中排除默认的日志起步依赖 -->
+    <!-- 经实践发现一些问题, Spring中某些类竟然会依赖这个日志 -->
+    <!-- <dependency>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-starter</artifactId>
+       <exclusions>
+           <exclusion>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-starter-logging</artifactId>
+           </exclusion>
+       </exclusions>
+    </dependency> -->
+    <!-- 配置log4j日志系统 -->
+    <!-- 
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-log4j</artifactId>
+      <version>${spring.boot.log4j.version}</version>
+    </dependency> 
+    -->
+    
     <!-- Web Starter -->
     <dependency>
        <groupId>org.springframework.boot</groupId>
 	   <artifactId>spring-boot-starter-web</artifactId>
-	   <exclusions>
-	     <!-- 去除原有的log4j日志依赖 -->
-	     <!-- 
-	     <exclusion>
-	       <groupId>org.slf4j</groupId>
-	       <artifactId>log4j-over-slf4j</artifactId>
-	     </exclusion> 
-	     -->
-	   </exclusions>
     </dependency>
     
     <!-- Spring 安全的起步依赖 -->
@@ -64,16 +76,6 @@
 	    <groupId>mysql</groupId>
 	    <artifactId>mysql-connector-java</artifactId>
 	</dependency>
-    
-    
-    <!-- 配置log4j日志系统 -->
-    <!-- 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-log4j</artifactId>
-      <version>${spring.boot.log4j.version}</version>
-    </dependency> 
-    -->
     
     <!-- 开发者工具，项目打包会自动被禁用，设置optional依赖级别为了防止其传递到项目其他模块 -->
     <dependency>

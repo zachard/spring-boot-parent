@@ -46,7 +46,7 @@ import com.zachard.spring.boot.hello.model.User;
  * @author zachard
  * @version 1.0.0
  */
-public class CustomerHttpMessageConverter extends AbstractHttpMessageConverter<User>{
+public class CustomerHttpMessageConverter extends AbstractHttpMessageConverter<User> {
 	
 	/**
 	 * HTTP中媒体类型
