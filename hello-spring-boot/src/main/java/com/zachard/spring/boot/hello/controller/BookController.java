@@ -18,7 +18,10 @@ package com.zachard.spring.boot.hello.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +29,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zachard.spring.boot.hello.model.Book;
+import com.zachard.spring.boot.hello.model.Reader;
 import com.zachard.spring.boot.hello.service.BookService;
+import com.zachard.spring.boot.hello.service.ReaderService;
 
 /**
  * {@link Book}相关请求Controller
@@ -38,9 +43,17 @@ import com.zachard.spring.boot.hello.service.BookService;
  */
 @Controller
 @RequestMapping("/book")
+@ConfigurationProperties(prefix = "amazon")
 public class BookController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
+	
 	private BookService bookService;
+	
+	@Autowired
+	private ReaderService readerService;
+	
+	private String associateId;
 	
 	/**
 	 * 查询读者阅读书籍列表请求接口
@@ -52,9 +65,13 @@ public class BookController {
 	@RequestMapping(value = "/{reader}", method = RequestMethod.GET)
 	public String readersBooks(@PathVariable("reader") String reader, Model model) {
 		List<Book> readingList = bookService.findByReader(reader);
+		Reader readerDetail = readerService.findByUsername(reader);
 		
 		if (readingList != null) {
 			model.addAttribute("books", readingList);
+			model.addAttribute("reader", readerDetail);
+			model.addAttribute("amazonID", associateId);
+			logger.info("associateId读取配置属性文件的值为: {}", associateId);
 		}
 		
 		return "readingList";
@@ -75,13 +92,22 @@ public class BookController {
 	}
 
 	/**
-	 * 自动装配{@link Book}对象持久化组件
+	 * 自动装配{@link Book} Service
 	 * 
-	 * @param  bookRepository  系统自动扫描注解的组件
+	 * @param  bookService  book相关Service组件
 	 */
 	@Autowired
 	public void setBookService(BookService bookService) {
 		this.bookService = bookService;
+	}
+
+	/**
+	 * 用于提供给{@link ConfigurationProperties}设定值的set方法
+	 * 
+	 * @param associateId 从属性文件中读取
+	 */
+	public void setAssociateId(String associateId) {
+		this.associateId = associateId;
 	}
 
 }

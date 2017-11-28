@@ -16,6 +16,8 @@
 
 package com.zachard.spring.boot.hello.service.impl;
 
+import java.util.Objects;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -46,7 +48,13 @@ public class ReaderServiceImpl implements ReaderService {
 	 */
 	@Override
 	public Reader findByUsername(String username) {
-		return readerDao.findByUsername(username);
+		Reader reader = readerDao.findByUsername(username);
+		
+		if (Objects.isNull(reader)) {
+			throw new IllegalArgumentException("用户名为: " + username + "的用户不存在");
+		}
+		
+		return reader;
 	}
 
 }
