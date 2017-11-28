@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
  *         比较多的情况, 而{@link Value}一般用于配置较少的情况
  *         {@link ConfigurationProperties}可以添加属性的前缀, 例如: 下面注解的"amazon", 并且它的属性
  *         配置可以是驼峰形式, 也可以是下划线分割, 也可以是中线分割
- *         {@link ConfigurationProperties}默认从application.properties文件中读取,
+ *         {@link ConfigurationProperties}默认从application.properties或application.yaml文件中读取,
  *         但可以通过<code>@PropertySource("classpath:xxx.yml")</code>配置其他属性文件
  *     (3) {@link ConfigurationProperties}属性可以与{@link NotNull}等数据校验配合使用, 在项目启动的时候,
  *         Spring Boot就会将配置文件的属性装配到成员变量,当校验不通过时,项目无法启动

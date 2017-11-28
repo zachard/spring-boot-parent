@@ -12,6 +12,7 @@ servers:
   
 # 在yaml文件中配置多个profile
 # 默认情况下server.port为8080, 当spring.profiles.active属性指定为development时，访问端口变成8090
+# 注意: 每个 Profile 结束之后都必须以 --- 结束
 server: 
   port: 8080
 ---
@@ -24,6 +25,7 @@ spring:
   profiles: production
 server: 
   port: 9090
+---
 
 # Spring Boot配置数据源
 #spring: 
@@ -33,6 +35,6 @@ server:
 #    password: root
 #    driver-class-name: com.mysql.jdbc.Driver
 
-# @ConfigurationProperties注解获取对应的属性值(在.yaml文件中配置无效)
+# @ConfigurationProperties注解获取对应的属性值
 #amazon: 
 #  associateId: valida
