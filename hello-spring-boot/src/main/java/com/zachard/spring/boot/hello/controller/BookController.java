@@ -21,13 +21,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.zachard.spring.boot.hello.bean.ConfigurationPropertiesBean;
 import com.zachard.spring.boot.hello.model.Book;
 import com.zachard.spring.boot.hello.model.Reader;
 import com.zachard.spring.boot.hello.service.BookService;
@@ -43,7 +43,6 @@ import com.zachard.spring.boot.hello.service.ReaderService;
  */
 @Controller
 @RequestMapping("/book")
-@ConfigurationProperties(prefix = "amazon")
 public class BookController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BookController.class);
@@ -53,7 +52,8 @@ public class BookController {
 	@Autowired
 	private ReaderService readerService;
 	
-	private String associateId;
+	@Autowired
+	private ConfigurationPropertiesBean propertiesBean;
 	
 	/**
 	 * 查询读者阅读书籍列表请求接口
@@ -70,8 +70,8 @@ public class BookController {
 		if (readingList != null) {
 			model.addAttribute("books", readingList);
 			model.addAttribute("reader", readerDetail);
-			model.addAttribute("amazonID", associateId);
-			logger.info("associateId读取配置属性文件的值为: {}", associateId);
+			model.addAttribute("amazonID", propertiesBean.getAssociateId());
+			logger.info("associateId读取配置属性文件的值为: {}", propertiesBean.getAssociateId());
 		}
 		
 		return "readingList";
@@ -99,15 +99,6 @@ public class BookController {
 	@Autowired
 	public void setBookService(BookService bookService) {
 		this.bookService = bookService;
-	}
-
-	/**
-	 * 用于提供给{@link ConfigurationProperties}设定值的set方法
-	 * 
-	 * @param associateId 从属性文件中读取
-	 */
-	public void setAssociateId(String associateId) {
-		this.associateId = associateId;
 	}
 
 }

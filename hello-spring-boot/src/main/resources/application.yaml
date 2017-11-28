@@ -34,5 +34,5 @@ server:
 #    driver-class-name: com.mysql.jdbc.Driver
 
 # @ConfigurationProperties注解获取对应的属性值(在.yaml文件中配置无效)
-amazon: 
-  associateId: valida
+#amazon: 
+#  associateId: valida
