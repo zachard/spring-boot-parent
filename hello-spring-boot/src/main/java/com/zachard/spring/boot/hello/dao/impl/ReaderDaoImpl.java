@@ -57,7 +57,7 @@ public class ReaderDaoImpl implements ReaderDao {
 	public Reader findByUsername(String username) {
 		return initReaders.stream()
 				          .filter(reader -> Objects.equals(reader.getUsername(), username))
-				          .findFirst().get();
+				          .findFirst().orElse(null);
 	}
 
 }

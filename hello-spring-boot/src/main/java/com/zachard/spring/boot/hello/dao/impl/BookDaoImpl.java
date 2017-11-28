@@ -51,7 +51,7 @@ public class BookDaoImpl implements BookDao {
 		initBooks.add(new Book(1L, "Amy", "1111", "1111", "凌大", "1111"));
 		initBooks.add(new Book(2L, "Amy", "2222", "2222", "唐二", "2222"));
 		initBooks.add(new Book(3L, "Bob", "3333", "3333", "张三", "3333"));
-		initBooks.add(new Book(3L, "Cary", "4444", "4444", "李四", "4444"));
+		initBooks.add(new Book(3L, "Bob", "4444", "4444", "李四", "4444"));
 	}
 	
 	/**
