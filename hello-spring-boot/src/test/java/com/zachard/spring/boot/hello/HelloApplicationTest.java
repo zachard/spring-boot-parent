@@ -22,6 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,6 +30,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import com.zachard.spring.boot.hello.model.Book;
 
 /**
  * Spring Boot Hello项目测试基类
@@ -87,6 +90,54 @@ public class HelloApplicationTest {
 		    .andExpect(MockMvcResultMatchers.model().attributeExists("books"))
 		    .andExpect(MockMvcResultMatchers.model().attribute("books", 
 		    		Matchers.is(Matchers.empty())));
+	}
+	
+	/**
+	 * 通过{@link MockMvc}对Controller的POST方法进行测试
+	 * 
+	 * <pre>
+	 *     测试期望结果如下: 
+	 *         (1) 发起一个POST请求,将书籍添加到列表
+	 *         (2) 添加书籍成功后,请求会被重定向,并且重定向的URL为: /book/{reader}
+	 * </pre>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void addToReadingListTest() throws Exception {
+		// 通过MockMvc测试POST方法请求
+		mockMvc.perform(MockMvcRequestBuilders.post("/book/Cary")
+				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("title", "BOOK TITLE")
+				.param("author", "BOOK AUTHOR")
+				.param("isbn", "1234567890")
+				.param("description", "DESCRIPTION"))
+		    .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+		    .andExpect(MockMvcResultMatchers.header().string("Location", "/book/Cary"));
+		
+		// 设置期望的书籍
+		Book exceptBook = new Book();
+		exceptBook.setTitle("BOOK TITLE");
+		exceptBook.setAuthor("BOOK AUTHOR");
+		exceptBook.setIsbn("1234567890");
+		exceptBook.setReader("Cary");
+		exceptBook.setDescription("DESCRIPTION");
+		
+		/*
+		 * 通过获取书籍列表, 并判断是否含有保存的书籍断言是否添加书籍成功
+		 * 这中验证方法是不科学的, 因为必须保证这个GET测试请求的接口是已经通过的
+		 * 
+		 * 注: hasSize方法要求的是与books属性个数完全匹配
+		 *     contains方法要求books列表中第一个元素与期望的Bean属性完全匹配
+		 */
+		mockMvc.perform(MockMvcRequestBuilders.get("/book/Cary"))
+		    .andExpect(MockMvcResultMatchers.status().isOk())
+		    .andExpect(MockMvcResultMatchers.view().name("readingList"))
+		    .andExpect(MockMvcResultMatchers.model().attributeExists("books"))
+		    .andExpect(MockMvcResultMatchers.model()
+		    		.attribute("books", Matchers.hasSize(1)))
+		    .andExpect(MockMvcResultMatchers.model()
+		    		.attribute("books", Matchers.contains(Matchers.samePropertyValuesAs(exceptBook))));
 	}
 	
 	@Test
