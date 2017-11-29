@@ -16,13 +16,6 @@
 
 package com.zachard.spring.boot.hello.model;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 /**
  * 读者对应数据库Model
  * <pre>
@@ -34,7 +27,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author zachard
  * @version 1.0.0
  */
-public class Reader implements UserDetails {
+public class Reader {
 	
 	/**
 	 * 序列化ID，显示声明时有如下好处:
@@ -85,12 +78,12 @@ public class Reader implements UserDetails {
 		this.fullname = fullname;
 	}
 	
-	@Override
+	//@Override
 	public String getPassword() {
 		return password;
 	}
 
-	@Override
+	//@Override
 	public String getUsername() {
 		return username;
 	}
@@ -114,17 +107,17 @@ public class Reader implements UserDetails {
 	 * 
 	 * @return   用户所具有的权限(暂时通过硬编码指定为读者角色)
 	 */
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Arrays.asList(new SimpleGrantedAuthority("READER"));
-	}
+//	@Override
+//	public Collection<? extends GrantedAuthority> getAuthorities() {
+//		return Arrays.asList(new SimpleGrantedAuthority("READER"));
+//	}
 
 	/**
 	 * 判断账户是否过期
 	 * 
 	 * @return  过期返回<code>false</code>, 否则返回<code>true</code>
 	 */
-	@Override
+	//@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
@@ -134,7 +127,7 @@ public class Reader implements UserDetails {
 	 * 
 	 * @return   锁定返回<code>false</code>, 否则返回<code>true</code>
 	 */
-	@Override
+	//@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
@@ -147,7 +140,7 @@ public class Reader implements UserDetails {
 	 * 
 	 * @return    密码过期返回<code>false</code>, 否则返回<code>true</code>
 	 */
-	@Override
+	//@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
@@ -160,7 +153,7 @@ public class Reader implements UserDetails {
 	 * 
 	 * @return    用户有效返回<code>true</code>, 用户失效返回<code>false</code>
 	 */
-	@Override
+	//@Override
 	public boolean isEnabled() {
 		return true;
 	}

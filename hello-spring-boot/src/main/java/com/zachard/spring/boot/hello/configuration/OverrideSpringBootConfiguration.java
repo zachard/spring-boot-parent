@@ -17,14 +17,6 @@
 package com.zachard.spring.boot.hello.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.zachard.spring.boot.hello.service.ReaderService;
 
@@ -36,9 +28,10 @@ import com.zachard.spring.boot.hello.service.ReaderService;
  * @author zachard
  * @version 1.0.0
  */
-@Configuration
-@EnableWebSecurity
-public class OverrideSpringBootConfiguration extends WebSecurityConfigurerAdapter {
+//@Configuration
+//@EnableWebSecurity
+// extends WebSecurityConfigurerAdapter
+public class OverrideSpringBootConfiguration {
 	
 	@Autowired
 	private ReaderService readerService;
@@ -48,45 +41,45 @@ public class OverrideSpringBootConfiguration extends WebSecurityConfigurerAdapte
 	 * 
 	 * @param  http  HTTP权限拦截配置
 	 */
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	//@Override
+	//protected void configure(HttpSecurity http) throws Exception {
 //		http.authorizeRequests()
 //		    .antMatchers("/book**").access("hasRole('READER')")
 //		    .and().formLogin()
 //		    .loginPage("/login")
 //		    .failureUrl("/login?error=true")
 //		    .and().csrf();
-	}
+	//}
 	
 	/**
 	 * 配置权限认证的用户
 	 * 
 	 * @param  auth  权限管理对象
 	 */
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// UserDetailsService接口是用于加载特定用户数据的接口
-		auth.userDetailsService(new UserDetailsService() {
-
-			/**
-			 * 根据用户名加载用户详情
-			 * 
-			 * @param username  用户名
-			 * @return  用户详细信息, 必须返回 UserDetails 对象
-			 */
-			@Override
-			public UserDetails loadUserByUsername(String username) 
-					throws UsernameNotFoundException {
-				UserDetails userDetails = readerService.findByUsername(username);
-				
-				if (userDetails != null) {
-					return readerService.findByUsername(username);
-				}
-				
-				throw new UsernameNotFoundException("用户名为: " + username + "的用户不存在.");
-			}
-			
-		});
-	}
+//	@Override
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//		// UserDetailsService接口是用于加载特定用户数据的接口
+//		auth.userDetailsService(new UserDetailsService() {
+//
+//			/**
+//			 * 根据用户名加载用户详情
+//			 * 
+//			 * @param username  用户名
+//			 * @return  用户详细信息, 必须返回 UserDetails 对象
+//			 */
+//			@Override
+//			public UserDetails loadUserByUsername(String username) 
+//					throws UsernameNotFoundException {
+//				UserDetails userDetails = readerService.findByUsername(username);
+//				
+//				if (userDetails != null) {
+//					return readerService.findByUsername(username);
+//				}
+//				
+//				throw new UsernameNotFoundException("用户名为: " + username + "的用户不存在.");
+//			}
+//			
+//		});
+//	}
 
 }

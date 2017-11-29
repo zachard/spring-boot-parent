@@ -61,11 +61,14 @@ public class HelloApplicationTest {
 	
 	/**
 	 * 每个测试方法执行之前都需要执行的方法
+	 * 
+	 * {@link SecurityMockMvcConfigurers#springSecurity()}用于配置Spring Security
 	 */
 	@Before
 	public void setupMockMvc() {
 		mockMvc = MockMvcBuilders
 				.webAppContextSetup(webContext)
+				//.apply(SecurityMockMvcConfigurers.springSecurity())
 				.build();
 	}
 	
