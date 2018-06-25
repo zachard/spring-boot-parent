@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   
   <modelVersion>4.0.0</modelVersion>
@@ -7,7 +8,10 @@
   <packaging>pom</packaging>
   
   <properties>
+      <java.version>1.8</java.version>
       <spring.boot.dependencies.version>1.5.6.RELEASE</spring.boot.dependencies.version>
+      <fastjson.version>1.2.38</fastjson.version>
+      <mysql.version>5.1.38</mysql.version>
   </properties>
   
   <dependencyManagement>
@@ -20,6 +24,24 @@
               <type>pom</type>
               <scope>import</scope>
           </dependency>
+          
+          <!-- json -->
+		  <dependency>
+		      <groupId>com.alibaba</groupId>
+		      <artifactId>fastjson</artifactId>
+		      <version>${fastjson.version}</version>
+		  </dependency>
+		  
+		  <!-- MySQL -->
+		  <dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>${mysql.version}</version>
+		</dependency>
       </dependencies>
   </dependencyManagement>
+  
+  <modules>
+    <module>hello-spring-boot</module>
+  </modules>
 </project>
