@@ -19,6 +19,7 @@ package com.zachard.spring.boot.hello;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -30,13 +31,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  *   {@link EnableAutoConfiguration} 注解告诉Spring Boot如何配置Spring
  *   {@link ComponentScan} 注解告诉Spring Boot将注解的类自动扫描为Bean
  *   {@link Configuration} 注解用于配置Spring Boot
- *   {@link SpringBootApplication} 注解包含了上述三个注解
+ *   {@link SpringBootApplication} 注解包含了上述三个注解, exclude属性防止Spring Boot自动配置一些不需要的配置
  * </p>
  *
  * @author zachard
  * @version 1.0.0
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class HelloApplication extends WebMvcConfigurerAdapter {
 	
 	static {

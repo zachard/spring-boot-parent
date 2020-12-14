@@ -100,6 +100,18 @@
 	  <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
     </dependency>
+    
+    <!-- 学习Spring Batch, 从而引入相关依赖 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-batch</artifactId>
+    </dependency>
+    <!-- 方便Spring Batch测试, 从而引入相关依赖 -->
+    <dependency>
+      <groupId>org.springframework.batch</groupId>
+      <artifactId>spring-batch-test</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   
   <build>
