@@ -31,9 +31,10 @@ import com.zachard.spring.boot.hello.model.BatchPerson;
 public class SpringBatchPersonItemProcessor implements ItemProcessor<BatchPerson, String> {
 
     @Override
-    public String process(BatchPerson arg0) throws Exception {
-        // TODO Auto-generated method stub
-        return null;
+    public String process(BatchPerson person) throws Exception {
+        String greeting = "Hello " + person.getFirstName() + 
+        		" " + person.getLastName() + "!";
+        return greeting;
     }
 
 }
